@@ -18,4 +18,4 @@ videos = [f for f in os.listdir(projectName)]
 print(videos)
 
 for video in videos:
-    animator.wysAnimate(60, video, video)
+    animator.wysAnimate(60, video, projectName + "/" + video)
