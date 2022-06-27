@@ -326,20 +326,25 @@ def wysAnimate(frameCount, animationName, mp4path):
     print("Processing video.")
     while (cap.isOpened() and count < frameCount):
         ret, frame = cap.read()
-        frame = cv2.resize(frame, (16, 9), fx = 0, fy = 0, interpolation = cv2.INTER_NEAREST)
+        try:
+            frame = cv2.resize(frame, (16, 9), fx = 0, fy = 0, interpolation = cv2.INTER_NEAREST)
 
-        gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+            gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
 
-        for x in range(16):
-            for y in range(9):
-                if gray[y,x] > 127:
-                    connections += 1
-                    wires.append("fantenna\n"+str(count)+"\n"+"door\n"+str(frameCount + y + 9*x)+"\n")
-        if cv2.waitKey(25) & 0xFF == ord('q'):
-            break
-        count += 1
-        print("frame #"+str(count))
+            for x in range(16):
+                for y in range(9):
+                    if gray[y,x] > 127:
+                        connections += 1
+                        wires.append("fantenna\n"+str(count)+"\n"+"door\n"+str(frameCount + y + 9*x)+"\n")
+            if cv2.waitKey(25) & 0xFF == ord('q'):
+                break
+            count += 1
+            print("frame #"+str(count))
+        except:
+            count += 1
+            continue
+            
     print("Video processing done!")
     # release the video capture object
     cap.release()
