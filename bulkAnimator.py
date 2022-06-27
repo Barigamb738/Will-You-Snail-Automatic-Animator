@@ -10,7 +10,7 @@ fullmp4Path = "2xrickroll.mp4"
 if not os.path.isdir(projectName):
     os.mkdir(projectName)
 
-#split.split_by_seconds(fullmp4Path, 2.4, projectName)
+split.split_by_seconds(fullmp4Path, 2.4, projectName)
 
 
 videos = [f for f in os.listdir(projectName)]
